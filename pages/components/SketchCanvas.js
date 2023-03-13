@@ -19,7 +19,18 @@ export default function SketchCanvas() {
       console.log(data);
       const blob = new Blob([data], { type: "image/svg+xml" });
       const url = URL.createObjectURL(blob);
-      window.open(url, "_blank");
+
+      // Crear el enlace de descarga
+      const downloadLink = document.createElement("a");
+      downloadLink.href = url;
+      downloadLink.download = "signature.svg";
+
+      // Agregar el enlace al DOM y disparar un evento click para iniciar la descarga
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+
+      // Eliminar el enlace del DOM después de la descarga
+      document.body.removeChild(downloadLink);
     });
   };
 
